@@ -92,8 +92,8 @@ namespace WS_Factura.Controllers
 
 
 
-        [HttpDelete]
-        public IActionResult Delete(ClienteView oModel)
+        [HttpDelete("{nit}")]
+        public IActionResult Delete(long nit)
         {
             Request oRespuesta = new Request();
             oRespuesta.Exito = 0;
@@ -101,7 +101,7 @@ namespace WS_Factura.Controllers
             {
                 using (FacturasContext db = new FacturasContext())
                 {
-                    Cliente oCliente = db.Clientes.Find(oModel.Nit);
+                    Cliente oCliente = db.Clientes.Find(nit);
                     db.Remove(oCliente);                   
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
